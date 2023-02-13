@@ -20,3 +20,4 @@ Initial Designs
 -------------
 ![Sample Page Layout](/docs/SamplePageLayout.jpg)
 ![Site Map](/docs/SiteMap.jpg)
+![Site Map Version 2](/docs/SiteMap2.jpg)
