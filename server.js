@@ -19,4 +19,3 @@ express()
     res.status(200).send('Healthy')
   })
   .listen(PORT, () => console.log(`Listening on ${PORT}`))
-
