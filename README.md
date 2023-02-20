@@ -6,3 +6,6 @@ Have you ever wanted to combine multiple different lists into one? Do you have a
 
 ## Render Link
 [The Butterfly Interest List](https://the-butterfly-interest-list.onrender.com)
+
+4. Hello from bwalbeck!
+4. bwalbeck can handle rejection.
