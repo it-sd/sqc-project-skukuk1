@@ -3,50 +3,50 @@
       <h2>The Butterfly Interest List Homepage</h2>
         <div id="anime_list">
           <table>
-		    <thead>
+            <thead>
               <tr>
                 <th>Anime</th>
                 <th>Studio</th>
                 <th>Genre</th>
                 <th>Personal Rating</th>
-				<th>Description</th>
+                <th>Description</th>
               </tr>
-			</thead>
-			<tbody>
+            </thead>
+            <tbody>
               <tr>
                 <%_ for (const anime of animes) { _%>
                   <td><%= anime.anime_name %></td>
                   <td><%= anime.studio %></td>
                   <td><%= anime.genre %></td>
                   <td><%= anime.personal_rating %></td>
-				  <td><%= anime.description %></td>
+                  <td><%= anime.description %></td>
                 <%_ } _%>
               </tr>
-			</tbody>
+            </tbody>
           </table>
         </div>
         <div id="manga_list">
           <table>
-		    <thead>
+            <thead>
               <tr>
                 <th>Manga</th>
                 <th>Author</th>
                 <th>Genre</th>
-				<th>Personal Rating</th>
+		<th>Personal Rating</th>
                 <th>Description</th>
               </tr>
-			</thead><br><br>
-			<tbody>
+            </thead><br><br>
+            <tbody>
               <tr>
                 <%_ for (const manga of mangas) { _%>
                   <td><%= manga.manga_name %></td>
                   <td><%= manga.author %></td>
                   <td><%= manga.genre %></td>
-				  <td><%= manga.personal_rating %></td>
+                  <td><%= manga.personal_rating %></td>
                   <td><%= manga.description %></td>
                 <%_ } _%>
               </tr>
-			</tbody>
+            </tbody>
           </table>
         </div>
     </main>
