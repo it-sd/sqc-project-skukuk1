@@ -1,30 +1,33 @@
 {
   "name": "sqc-project-skukuk1",
   "version": "1.0.0",
-  "description": "Your name or CVTC username",
-  "main": "index.js",
+  "description": "Samantha Kukuk (skukuk1)",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "eslint \"**/*.js\"",
-    "start": "node server.js"
+    "test": "jasmine",
+    "lint": "npx eslint \"**/*.js\"",
+    "start": "nyc npm test"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/it-sd/sqc-project-skukuk1.git"
   },
-  "author": "",
+  "author": "skukuk1",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/it-sd/sqc-project-skukuk1/issues"
   },
   "homepage": "https://github.com/it-sd/sqc-project-skukuk1#readme",
   "devDependencies": {
+    "@types/pg": "^8.6.6",
     "eslint": "^8.33.0",
     "eslint-config-standard": "^17.0.0",
     "eslint-plugin-html": "^7.1.0",
     "eslint-plugin-import": "^2.27.5",
     "eslint-plugin-n": "^15.6.1",
     "eslint-plugin-promise": "^6.1.1",
+    "jasmine": "^4.5.0",
+    "nyc": "^15.1.0",
     "postcss-html": "^1.5.0",
     "stylelint": "^15.1.0",
     "stylelint-config-html": "^1.1.0",
@@ -33,7 +36,9 @@
   "dependencies": {
     "dotenv": "^16.0.3",
     "ejs": "^3.1.8",
-    "express": "^4.18.2"
+    "express": "^4.18.2",
+    "path": "^0.12.7",
+    "pg": "^8.9.0"
   },
   "directories": {
     "doc": "docs"

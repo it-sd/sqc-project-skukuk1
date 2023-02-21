@@ -161,6 +161,24 @@ th:last-child {
   text-align: center;
 }
 
+label {
+  display: block;
+  float: left;
+  text-align: left;
+  width: 145px;
+  padding-right: 10px;
+}
+
+input,
+textarea {
+  display: block;
+  margin-bottom: 20px;
+}
+
+input[type=submit] {
+  margin-left: 150px;
+}
+
 /*Only Tablet*/
 @media only screen and (max-width: 64em) {
   body {
@@ -190,5 +208,14 @@ th:last-child {
 
   article img{
     display: none;
+  }
+  
+  label {
+    float: none; 
+    text-align: left;
+  }
+
+  input [type="submit"] {
+    margin-left: 0;
   }
 }

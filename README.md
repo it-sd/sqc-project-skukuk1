@@ -6,3 +6,6 @@ Have you ever wanted to combine multiple different lists into one? Do you have a
 
 ## Render Link
 [The Butterfly Interest List](https://the-butterfly-list.onrender.com)
+
+## Database Entity Relationship Diagram
+![Entity Relationship Diagram](/docs/EntityRelationshipDiagram.jpg)

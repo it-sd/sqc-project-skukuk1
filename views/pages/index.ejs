@@ -1,6 +1,26 @@
 <%- include('../shared/header.ejs') %>
     <main>
       <h2>The Butterfly Interest List Homepage</h2>
+        <table>
+          <tr>
+            <th>Anime</th>
+            <th>Studio</th>
+            <th>Genre</th>
+            <th>Description</th>
+            <th>Personal Rating</th>
+          </tr>
+          <tr>
+            <%_ for (const anime of animes) { _%>
+              <% if (anime.anime !== null) { %>
+                <td><%= anime.anime %></td>
+                <td><%= anime.studio %></td>
+                <td><%= anime.genre %></td>
+                <td><%= anime.desc %></td>
+                <td><%= anime.personal_rating %></td>
+              <% } %>
+            <%_ } _%>
+          </tr>
+        </table>
     </main>
     </div>
   </body>
