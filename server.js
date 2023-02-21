@@ -2,9 +2,9 @@ require('dotenv').config()
 
 const express = require('express')
 const path = require('path')
-const PORT = process.env.PORT || 5163
 const assert = require('assert')
 const { Pool } = require('pg')
+const PORT = process.env.PORT || 5163
 
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
@@ -16,6 +16,7 @@ const pool = new Pool({
 const query = async function (sql, params) {
   assert.strictEqual(typeof sql, 'string',
     'Expected src to be a string')
+
   let client
   let results = []
   try {
@@ -32,7 +33,7 @@ const query = async function (sql, params) {
 }
 
 const healthyQuery = async function () {
-  const result = await query('SELECT * FROM anime LIMIT 1;')
+  const result = await query('SELECT * FROM anime_list LIMIT 1;', [])
 
   let status = 200
   let msg = 'healthy'
@@ -44,8 +45,21 @@ const healthyQuery = async function () {
   return { status, msg }
 }
 
-const getAnimeQuery = async function () {
-  const result = await query('SELECT * FROM anime;')
+const getAnimesQuery = async function () {
+  const result = await query('SELECT * FROM anime_list;', [])
+
+  let status = 200
+  let msg = 'healthy'
+
+  if (result === undefined || result.length === 0) {
+    status = 500
+    msg = 'unhealthy'
+  }
+  return { status, msg, result }
+}
+
+const getMangasQuery = async function () {
+  const result = await query('SELECT * FROM manga_list;', [])
 
   let status = 200
   let msg = 'healthy'
@@ -60,7 +74,8 @@ const getAnimeQuery = async function () {
 module.exports = {
   query,
   healthyQuery,
-  getAnimeQuery
+  getAnimesQuery,
+  getMangasQuery
 }
 
 express()
@@ -70,8 +85,9 @@ express()
   .set('views', path.join(__dirname, 'views'))
   .set('view engine', 'ejs')
   .get('/', async function (req, res) {
-    const result = await getAnimeQuery()
-    res.render('pages/index', { animes: result.results })
+    const resultsAnime = await getAnimesQuery()
+    const resultsManga = await getMangasQuery()
+    res.render('pages/index', { animes: resultsAnime.result, mangas: resultsManga.result })
   })
   .get('/about', function (req, res) {
     res.render('pages/about')
