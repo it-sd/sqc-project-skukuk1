@@ -8,4 +8,4 @@ Have you ever wanted to combine multiple different lists into one? Do you have a
 [The Butterfly Interest List](https://the-butterfly-list.onrender.com)
 
 ## Database Entity Relationship Diagram
-![Entity Relationship Diagram](/docs/EntityRelationshipDiagram.jpg)
+![Entity Relationship Diagram](/public/EntityRelationshipDiagram.jpg)
