@@ -1,11 +1,11 @@
 body {
-  background-color: #E8C5F0;
-  color: #000;
+  background-color: #EB82A0;
+  color: #FFF7F9;
   font-family: Verdana, Arial, sans-serif;
 }
 
 #wrapper {
-  background-color: #AB6ABB;
+  background-color: #D7557A;
   border-radius: 5px;
   border-left: 1px solid #4C055E;
   border-right: 1px solid #4C055E;
@@ -28,7 +28,7 @@ dt {
 }
 
 main {
-  background-color: #E8C5F0;
+  background-color: #EB82A0;
   padding: 20px;
   display: block;
   overflow: auto;
@@ -59,6 +59,8 @@ h1, h2, h3 {
 }
 
 h1 {
+  background-image: url(butterfly_logo.png);
+  background-size: 600px;
   background-position: center;
   background-repeat: no-repeat;
   text-indent: -9999px;
@@ -67,8 +69,7 @@ h1 {
 }
 
 h3 {
-  background-color: #E8C5F0;
-  text-transform: uppercase;
+  background-color: #EB82A0;
 }
 
 nav {
@@ -102,12 +103,15 @@ nav > ul > li > a {
 }
 
 header {
-  background-color: #8C419E;
+  background-image: url('butterfly_logo');
+  background-color: #AE3F5E;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 footer {
-  background-color: #8C419E;
-  color: #000;
+  background-color: #AE3F5E;
+  color: #FFF7F9;
   font-size: .60em;
   font-style: italic;
   text-align: center;
@@ -115,20 +119,20 @@ footer {
 }
 
 a:link {
-  color: #3D014E;
+  color: #FDEEF2;
 }
 
 a:visited {
-  color: #61097A;
+  color: #FDEEF2;
 }
 
 a:hover,
 a:focus {
-  color: #E8C5F0;
+  color: #7C0023;
 }
 
 footer > a:link {
-  color: #4C055E;
+  color: #FDEEF2;
 }
 
 footer > a:visited {
@@ -136,13 +140,14 @@ footer > a:visited {
 }
 
 footer > a:hover > a:focus {
-  color: #E8C5F0;
+  color: #7C0023;
 }
 
 th {
-  background-color: #F2DDF7;
+  background-color: #FDEEF2;
   font-weight: bold;
   text-align: left;
+  color: #7C0023;
 }
 
 td {
@@ -155,12 +160,13 @@ th:last-child {
 }
 
 tr:nth-child(even) {
-  background-color: #F2DDF7;
+  background-color: #EB82A0;
+  color: #7C0023;
 }
 
 tr:nth-child(odd) {
-  background-color: #E8C5F0;
-  
+  background-color: #FDEEF2;
+  color: #7C0023;
 }
 
 td:last-child,
@@ -189,7 +195,7 @@ input[type=submit] {
 /*Only Tablet*/
 @media only screen and (max-width: 64em) {
   body {
-    background-color: #8C419E;
+    background-color: #AE3F5E;
     margin: 0px;
   }
 
@@ -201,6 +207,10 @@ input[type=submit] {
     border-right: none;
     border-top: none;
     border-bottom: none;
+  }
+  
+  h1 {
+    background-image: url(butterfly_logo.png);
   }
 }
 
