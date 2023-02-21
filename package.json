@@ -6,7 +6,7 @@
   "scripts": {
     "test": "jasmine",
     "lint": "npx eslint \"**/*.js\"",
-    "start": "nyc npm test"
+    "coverage": "nyc npm test"
   },
   "repository": {
     "type": "git",
