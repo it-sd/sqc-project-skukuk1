@@ -143,6 +143,10 @@ footer > a:hover > a:focus {
   color: #7C0023;
 }
 
+li{
+  list-style: none;
+}
+
 th {
   background-color: #FDEEF2;
   font-weight: bold;
@@ -152,26 +156,29 @@ th {
 
 td {
   text-align: left;
+  padding: initial;
 }
 
 td:last-child,
 th:last-child {
   padding: 10px;
+  float: left; 
 }
 
 tr:nth-child(even) {
-  background-color: #EB82A0;
+  background-color: #FDEEF2;
   color: #7C0023;
 }
 
 tr:nth-child(odd) {
-  background-color: #FDEEF2;
+  background-color: #F986A7;
   color: #7C0023;
 }
 
 td:last-child,
 th:last-child {
   text-align: left;
+  float: left;
 }
 
 label {
@@ -210,7 +217,7 @@ input[type=submit] {
   }
   
   h1 {
-    background-image: url(butterfly_logo.png);
+    background-size: 600px;
   }
 }
 
@@ -221,6 +228,10 @@ input[type=submit] {
     border-right: none;
     border-top: none;
     border-bottom: none;
+  }
+  
+  h1 {
+    background-size: 350px;
   }
 
   article img{
@@ -234,5 +245,12 @@ input[type=submit] {
 
   input [type="submit"] {
     margin-left: 0;
+  }
+}
+
+/*Only Galaxy Fold*/
+@media only screen and (max-width: 20em) {
+  h1 {
+    background-size: 260px;
   }
 }
