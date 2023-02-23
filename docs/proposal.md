@@ -18,6 +18,5 @@ As I stated, I'm interested in making a place where anime, manga, and a whole bu
 
 Initial Designs
 -------------
-![Sample Page Layout](/docs/SamplePageLayout.jpg)
-![Site Map](/docs/SiteMap.jpg)
-![Site Map Version 2](/docs/SiteMap2.jpg)
+![Sample Page Layout](/docs/proposal_designs/SamplePageLayout.ppg)
+![Site Map](/docs/proposal_designs/SiteMap.png)

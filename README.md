@@ -13,4 +13,4 @@ Here at The Butterfly Interest List, you will be able to create a list from your
 We can't wait for you to use our site. Enjoy your visit!
 
 ## Database Entity Relationship Diagram
-![Entity Relationship Diagram](/public/EntityRelationshipDiagram.png)
+![Entity Relationship Diagram](/docs/EntityRelationshipDiagram.png)
