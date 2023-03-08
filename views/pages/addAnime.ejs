@@ -1,0 +1,60 @@
+<%- include('../shared/header.ejs') %>
+    <main>
+      <h2>The Butterfly Interest List - Add Anime Page</h2>
+	  <div>
+	    <h3>New Anime</h3>
+	    <form id="newAnimeForm">
+		  <label for="animeNameInput">Anime name: </label>
+          <input type="text" name="anime_name">
+
+		  <label for="studioInput">Studio: </label>
+          <input type="text" name="studio">
+
+		  <label for="genreInput">Genre: </label>
+          <input type="text" name="genre">
+		  
+		  <label for="personalRatingInput">Personal rating: </label>
+          <input type="text" name="personal_rating">
+
+		  <label for="synopsisInput">Synopsis: </label>
+          <input type="text" name="synopsis">
+		  
+		  <input type="submit" id="newAnimeSubmit">
+        </form>
+      </div>
+    </main>
+</body>
+<script>
+  const submitAnime = function(event) {
+    event.preventDefault();
+    const animeName = document.getElementsByName("animeNameInput")[0].value;
+	const studio = document.getElementsByName("studioInput")[0].value;
+	const genre = document.getElementsByName("genreInput")[0].value;
+	const personalRating = document.getElementsByName("personalRatingInput")[0].value;
+	const synopsis = document.getElementsByName("synopsisInput")[0].value;
+  }
+  const anime = {
+    animeName: animeName,
+	studio: studio,
+	genre: genre,
+	personalRating: personalRating,
+	synopsis: synopsis
+  }
+
+  console.log(anime);
+
+  const res = fetch("/newAnime", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(anime)
+  })
+  if (res.ok) {
+    document.getElementById("newAnimeForm").innerHTML = "Anime Added";
+  } else {
+    document.getElementById("newAnimeForm").innerHTML = "Anime Not Added";
+  }
+  document.getElementById("newAnimeSubmit").addEventListener("click", submitAnime);
+</script>
+<%- include('../shared/footer.ejs') %>

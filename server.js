@@ -1,9 +1,16 @@
-require('dotenv').config()
+// const fetch = require('node-fetch')
+import fetch from 'node-fetch'
+import dotenv from 'dotenv'
+import express from 'express'
+import path from 'path'
+import assert from 'assert'
+import pg from 'pg'
+import { fileURLToPath } from 'url'
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
+const { Pool } = pg
+dotenv.config()
 
-const express = require('express')
-const path = require('path')
-const assert = require('assert')
-const { Pool } = require('pg')
 const PORT = process.env.PORT || 5163
 
 const pool = new Pool({
@@ -71,7 +78,7 @@ const getMangasQuery = async function () {
   return { status, msg, result }
 }
 
-module.exports = {
+export {
   query,
   healthyQuery,
   getAnimesQuery,
@@ -84,10 +91,8 @@ express()
   .use(express.urlencoded({ extended: true }))
   .set('views', path.join(__dirname, 'views'))
   .set('view engine', 'ejs')
-  .get('/', async function (req, res) {
-    const resultsAnime = await getAnimesQuery()
-    const resultsManga = await getMangasQuery()
-    res.render('pages/index', { animes: resultsAnime.result, mangas: resultsManga.result })
+  .get('/', function (req, res) {
+    res.render('pages/index')
   })
   .get('/about', function (req, res) {
     res.render('pages/about')
@@ -95,5 +100,30 @@ express()
   .get('/health', async function (req, res) {
     const result = await healthyQuery()
     res.status(result.status).send(result.msg)
+  })
+  .get('/lists', async function (req, res) {
+    const resultsAnime = await getAnimesQuery()
+    const resultsManga = await getMangasQuery()
+    res.render('pages/lists', { animes: resultsAnime.result, mangas: resultsManga.result })
+  })
+  .get('/addAnime', function (req, res) {
+    res.render('pages/addAnime')
+  })
+  .get('/getAnimes', async function (req, res) {
+    const resultsAnime = await getAnimesQuery()
+    res.status(200).json({ animes: resultsAnime.result })
+  })
+  .post('/newAnime', async function (req, res) {
+    const { animeName, studio, genre, personalRating, synopsis } = req.body
+    console.log(animeName, studio, genre, personalRating, synopsis)
+    if (animeName === null || animeName === '') {
+      res.status(400).send('Bad Request')
+      res.end()
+    } else {
+      const sql = 'INSERT INTO anime_list (animeName, studio, genre, personalRating, synopsis) VALUES ($1, $2, $3, $4, $5);'
+      const params = [animeName, studio, genre, personalRating, synopsis]
+      const animeResult = await query(sql, params)
+      res.status(200).json({ animeResult })
+    }
   })
   .listen(PORT, () => console.log(`Listening on ${PORT}`))

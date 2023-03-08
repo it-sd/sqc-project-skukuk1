@@ -1,55 +1,6 @@
 <%- include('../shared/header.ejs') %>
     <main>
       <h2>The Butterfly Interest List - Home Page</h2>
-      <div id="anime_list">
-        <h3>Anime List</h3>
-        <ul>
-          <%_ for (const anime of animes) { _%>
-            <li>
-              <dl>
-                <dt>Anime</dt>
-                <dd><%= anime.anime_name %></dd>
-
-                <dt>Studio</dt>
-                <dd><%= anime.studio %></dd>
-
-                <dt>Genre</dt>
-                <dd><%= anime.genre %></dd>
-
-                <dt>Personal Rating</dt>
-                <dd><%= anime.personal_rating %></dd>
-
-                <dt>Synopsis</dt>
-                <dd><%= anime.synopsis %></dd>
-              </dl>
-            </li>
-          <%_ } _%>
-        </ul>
-      </div><br>
-      <div id="manga_list">
-        <h3>Manga List</h3>
-        <ul>
-          <%_ for (const manga of mangas) { _%>
-            <li>
-              <dl>
-                <dt>Manga</dt>
-                <dd><%= manga.manga_name %></dd>
-
-                <dt>Author</dt>
-                <dd><%= manga.author %></dd>
-
-                <dt>Genre</dt>
-                <dd><%= manga.genre %></dd>
-
-                <dt>Personal Rating</dt>
-                <dd><%= manga.personal_rating %></dd>
-
-                <dt>Synopsis</dt>
-                <dd><%= manga.synopsis %></dd>
-              </dl>
-            </li>
-          <%_ } _%>
-        </ul>
-      </div>
+      <p>Welcome! Feel free to check out our about page to learn more about us.</p>
     </main>
 <%- include('../shared/footer.ejs') %>
