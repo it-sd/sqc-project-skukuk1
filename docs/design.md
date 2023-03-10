@@ -1,6 +1,6 @@
 The Butterfly Interest List Design
 =============
-This page will include the original and new designs I implemented, along with pictures and explanations.
+This page will include my project's style choices as well as the original and new designs I implemented, along with pictures and explanations.
 
 Original Designs
 -------------
