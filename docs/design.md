@@ -31,3 +31,15 @@ On the home page, I fixed the errors and styled the different lists as lists ins
 ![New Home Page](/docs/new_designs/NewHomePage.png)
 
 ![New Home Page 2](/docs/new_designs/NewHomePage2.png)
+
+Color Scheme or Palette
+-------------
+The color scheme or palette that I currently have on my site is monochromatic, or one color. At first, I decided to go with purple because that was easiest on my eyes and my favorite color. But I decided to ask around and see what color people preferred. Out of all the color options given to my friends and family, most went with red. Red was a very bold color, and I agreed that it fit my site and the name of the project. I decided to go onto the site Paletton as they have many options for different color palettes. I started playing around until I found something that I liked, then asked my peers what they thought, and many loved it. Below will be two sets of palettes, one darker and one lighter, which I have both used.
+
+![Darker Color Palette](/docs/palette/DarkerColorPalette.png)
+
+![Lighter Color Palette](/docs/palette/LighterColorPalette.png)
+
+Font or Typography
+-------------
+The fonts I have chosen for the body are Verdana, Arial, and Sans-Serif. The fonts I have chosen for the headers are Georgia, Times New Roman, and Serif. All of these fonts should be pretty familiar to most people, and they can be used with any application. Instead of choosing one, I listed up to three choices in case the application didn't recognize the font. I still have a backup, so it won't default. Personally, these are my favorite fonts to use because they are easy to read and provide a sleek look to the site. Again, these fonts are familiar to most users as well as the applications themselves, so that makes them all the better to use. In my CSS file, there are lots of stylistic choices I chose to use, from the headers to the title to the footer. Everything has a purpose and melts together perfectly.
