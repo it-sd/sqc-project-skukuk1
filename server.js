@@ -120,9 +120,29 @@ express()
       res.status(400).send('Bad Request')
       res.end()
     } else {
-      const sql = 'INSERT INTO anime_list (animeName, studio, genre, personalRating, synopsis) VALUES ($1, $2, $3, $4, $5);'
-      const params = [animeName, studio, genre, personalRating, synopsis]
-      const animeResult = await query(sql, params)
+      const insertAnimeSql = 'INSERT INTO anime_list (anime_name, studio, genre, personal_rating, synopsis) VALUES ($1, $2, $3, $4, $5);'
+      const animeParams = [animeName, studio, genre, personalRating, synopsis]
+      const animeResult = await query(insertAnimeSql, animeParams)
+      res.status(200).json({ animeResult })
+    }
+  })
+  .get('/addManga', function (req, res) {
+    res.render('pages/addManga')
+  })
+  .get('/getMangas', async function (req, res) {
+    const resultsManga = await getMangasQuery()
+    res.status(200).json({ mangas: resultsManga.result })
+  })
+  .post('/newManga', async function (req, res) {
+    const { mangaName, author, genre, personalRating, synopsis } = req.body
+    console.log(mangaName, author, genre, personalRating, synopsis)
+    if (mangaName === null || mangaName === '') {
+      res.status(400).send('Bad Request')
+      res.end()
+    } else {
+      const insertMangaSql = 'INSERT INTO manga_list (manga_name, author, genre, personal_rating, synopsis) VALUES ($1, $2, $3, $4, $5);'
+      const mangaParams = [mangaName, author, genre, personalRating, synopsis]
+      const animeResult = await query(insertMangaSql, mangaParams)
       res.status(200).json({ animeResult })
     }
   })

@@ -27,33 +27,34 @@
 <script>
   const submitAnime = function(event) {
     event.preventDefault();
-    const animeName = document.getElementsByName("animeNameInput")[0].value;
-	const studio = document.getElementsByName("studioInput")[0].value;
-	const genre = document.getElementsByName("genreInput")[0].value;
-	const personalRating = document.getElementsByName("personalRatingInput")[0].value;
-	const synopsis = document.getElementsByName("synopsisInput")[0].value;
-  }
-  const anime = {
-    animeName: animeName,
-	studio: studio,
-	genre: genre,
-	personalRating: personalRating,
-	synopsis: synopsis
-  }
+    const animeName = document.getElementsByName("animeNameInput");
+	const studio = document.getElementsByName("studioInput");
+	const genre = document.getElementsByName("genreInput");
+	const personalRating = document.getElementsByName("personalRatingInput");
+	const synopsis = document.getElementsByName("synopsisInput");
 
-  console.log(anime);
+    const anime = {
+      animeName: animeName,
+	  studio: studio,
+	  genre: genre,
+	  personalRating: personalRating,
+	  synopsis: synopsis
+    }
 
-  const res = fetch("/newAnime", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify(anime)
-  })
-  if (res.ok) {
-    document.getElementById("newAnimeForm").innerHTML = "Anime Added";
-  } else {
-    document.getElementById("newAnimeForm").innerHTML = "Anime Not Added";
+    console.log(anime);
+
+    const res = fetch("/newAnime", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(anime)
+    })
+    if (res.ok) {
+      document.getElementById("newAnimeForm").innerHTML = "Anime added successfully.";
+    } else {
+      document.getElementById("newAnimeForm").innerHTML = "Anime not added. Please try again.";
+    }
   }
   document.getElementById("newAnimeSubmit").addEventListener("click", submitAnime);
 </script>
