@@ -1,0 +1,92 @@
+<%- include('../shared/header.ejs') %>
+    <main>
+      <h2>The Butterfly Interest List - Account Signup/Creation Page</h2>
+	  <div>
+	    <h3>New Account</h3>
+	    <form id='newAccountForm'>
+		  <label for='accountNameInput'>Account Name: </label>
+          <input type='text' name='account_name' id='accountNameInput'>
+            
+          <label for='accountOwnerInput'>Account Owner's Name: </label>
+          <input type='text' name='owner_name' id='accountOwnerInput'>
+
+		  <label for='emailInput'>Email: </label>
+          <input type='text' name='email' id='emailInput'>
+
+		  <label for='phoneInput'>Phone Number: </label>
+          <input type='text' name='phone' id='phoneInput'>
+		  
+		  <label for='interestsInput'>Interests: </label>
+          <input type='text' name='interests' id='interestsInput'>
+		  
+		  <input type='submit' id='newAccountSubmit' value='Create'>
+        </form>
+      </div>
+    </main>
+<script>
+
+    // In this page, I start by getting access to all of the
+    // input boxes using getElementById, this includes the 
+    // submit button and the form, which is used to display
+    // messages to the user
+
+    const form = document.getElementById('newAccountForm')
+
+    const accountName = document.getElementById('accountNameInput')
+    const ownerName = document.getElementById('accountOwnerInput')
+    const ownerEmail = document.getElementById('emailInput')
+    const ownerPhone = document.getElementById('phoneInput')
+    const ownerInterests = document.getElementById('interestsInput')
+    const submitButton = document.getElementById('newAccountSubmit')
+
+    // Next I create a function that will execute when user hits
+    // the 'Create button'
+
+    const submitAccount = async function() {
+
+        // start by displaying 'Please wait' during wait time
+        form.innerHTML = 'Please wait'
+
+        // Then get that values that are entered by the user
+        const account = accountName.value
+        const owner = ownerName.value
+        const em = ownerEmail.value
+        const ph = ownerPhone.value
+        const int = ownerInterests.value
+
+        // Create data that stores all the values and can easily be
+        // passed back to server
+        const data = {
+          accountName: account,
+          ownerName: owner,
+          email: em,
+          phone: ph,
+          interests: int
+        }
+
+        // I then send the user information to the server
+        const response = await fetch('/newAccount', {
+          method: 'POST',
+          headers: {
+               Accept: 'application/json',
+              'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(data)
+        })
+
+        // If server sends back an okay response, I display a success
+        // message
+        if (response.ok) {
+            const result = await response.json()
+            if (result.ok) {
+                form.innerHTML = `Account added successfully!`
+                return
+            }
+        }
+
+        // If there was an issue, send back an error message
+        form.innerHTML = 'Server error'
+    }
+submitButton.addEventListener('click', (e) => submitAccount())
+</script> 
+<%- include('../shared/footer.ejs') %>
