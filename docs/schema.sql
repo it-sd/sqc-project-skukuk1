@@ -1,10 +1,15 @@
 \encoding UTF8
 
-/*DROP DATABASE the_butterfly_interest_list;
+/*
+These first few lines appeared to be creating issues on my end,
+if they are needed for yours, I apologize, just uncomment them.
+
+DROP DATABASE the_butterfly_interest_list;
 CREATE DATABASE the_butterfly_interest_list;
 
 \c the_butterfly_interest_list
 */
+
 DROP TABLE IF EXISTS list_item;
 CREATE TABLE list_item (
   list_item_id SERIAL PRIMARY KEY,
@@ -32,6 +37,7 @@ CREATE TABLE manga_list (
   synopsis TEXT NOT NULL
 );
 
+/* Created new table account to handle New Account information */
 DROP TABLE IF EXISTS account;
 CREATE TABLE account (
   account_id SERIAL PRIMARY KEY,
