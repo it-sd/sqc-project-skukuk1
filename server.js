@@ -127,12 +127,17 @@ express()
       const phone = req.body.phone
       const interests = req.body.interests
 
-      const insertSql = "INSERT INTO account (account_name, owner_name, email, phone, interest) VALUES('" + accountName + "', '" + ownerName + "', '" + email + "', '" + phone + "', '" + interests + "');"
+      if (accountName === null || accountName === '') {
+        res.status(400).send('Server Error')
+        res.end()
+      } else {
+        const insertSql = "INSERT INTO account (account_name, owner_name, email, phone, interest) VALUES('" + accountName + "', '" + ownerName + "', '" + email + "', '" + phone + "', '" + interests + "');"
 
-      await client.query(insertSql)
+        await client.query(insertSql)
 
-      res.json({ ok: true })
-      client.release()
+        res.json({ ok: true })
+        client.release()
+      }
     } catch (error) {
       console.error('Invalid Entry')
       res.status(400).json({ ok: false })

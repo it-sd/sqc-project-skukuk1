@@ -73,4 +73,22 @@ describe("POST '/newAccount'", function () {
     const results = await response.json()
     expect(results.ok).toBeTrue()
   })
+  it('should not send information to database if accountName is null', async function () {
+    const data = {
+      accountName: '',
+      ownerName: '',
+      email: '',
+      phone: '',
+      interests: ''
+    }
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    })
+    expect(response.ok).toBeFalse()
+  })
 })
