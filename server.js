@@ -106,6 +106,45 @@ express()
     const resultsManga = await getMangasQuery()
     res.render('pages/lists', { animes: resultsAnime.result, mangas: resultsManga.result })
   })
+
+  // This is where the create account functionaily starts
+  // start by just loading new page that I created called account
+  .get('/account', (req, res) => {
+    res.render('pages/account')
+  })
+
+  // This is the post method for the account page, it is called newAccount
+  // creates a post request and talks to account.ejs
+  // gets data entered in input form from ejs and sends to database table called account
+  .post('/newAccount', async function (req, res) {
+    res.set({ 'Content-Type': 'application/json' })
+    try {
+      const client = await pool.connect()
+
+      const accountName = req.body.accountName
+      const ownerName = req.body.ownerName
+      const email = req.body.email
+      const phone = req.body.phone
+      const interests = req.body.interests
+
+      if (accountName === null || accountName === '') {
+        res.status(400).send('Server Error')
+        res.end()
+      } else {
+        const insertSql = "INSERT INTO account (account_name, owner_name, email, phone, interest) VALUES('" + accountName + "', '" + ownerName + "', '" + email + "', '" + phone + "', '" + interests + "');"
+
+        await client.query(insertSql)
+
+        res.json({ ok: true })
+        client.release()
+      }
+    } catch (error) {
+      console.error('Invalid Entry')
+      res.status(400).json({ ok: false })
+    }
+  })
+  // End of create account functionality and code
+
   .get('/addAnime', function (req, res) {
     res.render('pages/addAnime')
   })

@@ -42,3 +42,53 @@ describe('getAnimes Fetch', function () {
     expect(body.animes).toBeDefined()
   })
 })
+// Test lmarquardt7 added for account page
+describe('GET /account', function () {
+  it('should return a status between 200 & 399', async function () {
+    const result = await fetch(baseUrl)
+    expect(result.status).toBeGreaterThanOrEqual(200)
+    expect(result.status).toBeLessThanOrEqual(399)
+  })
+})
+describe("POST '/newAccount'", function () {
+  const url = new URL('/newAccount', baseUrl)
+  it('should accept valid account information and send to database', async function () {
+    const data = {
+      accountName: 'jasmineTestAccount',
+      ownerName: 'jasmineTestOwner',
+      email: 'jasmine@TestEmail',
+      phone: '123-456-7890',
+      interests: 'jasmineTestInterests'
+    }
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    })
+    expect(response.ok).toBeTrue()
+
+    const results = await response.json()
+    expect(results.ok).toBeTrue()
+  })
+  it('should not send information to database if accountName is null', async function () {
+    const data = {
+      accountName: '',
+      ownerName: '',
+      email: '',
+      phone: '',
+      interests: ''
+    }
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    })
+    expect(response.ok).toBeFalse()
+  })
+})
