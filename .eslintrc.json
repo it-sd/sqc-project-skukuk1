@@ -13,6 +13,5 @@
         "ecmaVersion": "latest"
     },
     "rules": {
-    },
-    "plugins": [ "html" ]
+    }
 }
