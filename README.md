@@ -12,13 +12,10 @@ Here at The Butterfly Interest List, you will be able to create a list from your
 
 We can't wait for you to use our site. Enjoy your visit!
 
-## Render Link
-[The Butterfly Interest List](https://the-butterfly-interest-list.onrender.com)
-
 ## Database Entity Relationship Diagram
 ![Entity Relationship Diagram](/docs/EntityRelationshipDiagram.png)
 
-## Datbase Connection
+## Database Connection
 I've decided to create a new database with the name of "the_butterfly_interest_list".
 
 If you decide to keep this database, you will need to make a `.env` file. 
