@@ -19,7 +19,13 @@ We can't wait for you to use our site. Enjoy your visit!
 ![Entity Relationship Diagram](/docs/EntityRelationshipDiagram.png)
 
 ## Datbase Connection
-I've decided to create a new database with the name of "the_butterfly_interest_list". If you decide to keep this database, you will need to make a `.env` file. All you need to have in the file is `DATABASE_URL=postgres://postgres:postgres@localhost/the_butterfly_interest_list`. Note: I've only tested this as a Windows user.
+I've decided to create a new database with the name of "the_butterfly_interest_list".
+
+If you decide to keep this database, you will need to make a `.env` file. 
+
+All you need to have in the file is `DATABASE_URL=postgres://postgres:postgres@localhost/the_butterfly_interest_list`.
+
+*Note: I've only tested this as a Windows user.*
 
 If you want to use the default database, then you'll want to comment out these lines in the `schema.sql` file.
 
