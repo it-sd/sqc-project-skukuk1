@@ -1,0 +1,16 @@
+<%- include('../shared/header.ejs') %>
+  <main>
+    <h2>The Butterfly Interest List - Profile Page</h2>
+	<p><a href="account">Create profile by clicking here.</a></p><br>
+    <div id="profile">
+      <%_ for (const profile of profiles) { _%>
+	    <h3><%= profile.account_name %>'s Profile</h3>
+        <p>Welcome <%= profile.owner_name %>! Listed below is all the information you provided.</p>
+	    <p>Email - <%= profile.email %></p>
+	    <p>Phone Number - <%= profile.phone %></p>
+	    <p>Your Interests - <%= profile.interest %></p>
+      <%_ } _%>
+    </div>
+  </main>
+</body>
+<%- include('../shared/footer.ejs') %>

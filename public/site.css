@@ -16,13 +16,6 @@ body {
   width: 80%; min-width: 960px; max-width: 2048px;
 }
 
-#anime_list {
-}
-
-#manga_list {
-}
-
-
 dt {
   font-weight: bold;
 }
@@ -197,6 +190,12 @@ textarea {
 
 input[type=submit] {
   margin-left: 150px;
+}
+
+option {
+  -webkit-appearance:none; 
+  -moz-appearance:none; 
+  appearance:none;
 }
 
 /*Desktop*/

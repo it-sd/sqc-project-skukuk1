@@ -1,6 +1,87 @@
 <%- include('../shared/header.ejs') %>
     <main>
       <h2>The Butterfly Interest List - Home Page</h2>
-      <p>Welcome! Feel free to check out our about page to learn more about us.</p>
+      <p>Welcome! Feel free to check out our <a href="about">about page</a> to learn more about us.</p>
+	  <p>
+	    If you would like to contact us look no further! 
+		Either email us at <a href="mailto:skukuk1@student.cvtc.edu">skukuk1@student.cvtc.edu</a> 
+	    or you can fill out the form below.
+      </p>
+	  <div>
+        <h3>Contact Us</h3>
+	    <p><em>Note: items with "*" are required and you will be met with "Server error" if you don't fill them out.</em></p>
+		<form id='newContactForm'>
+		  <label for='firstNameInput'>First Name: </label>
+          <input type='text' name='first_name' id='firstNameInput'>
+
+		  <label for='lastNameInput'>Last Name: </label>
+          <input type='text' name='last_name' id='lastNameInput'>
+
+		  <label for='emailInput'>Email: </label>
+          <input type='text' name='email' id='emailInput'>
+		  
+		  <label for='subjectInput'>Subject: </label>
+          <input type='text' name='subject' id='subjectInput'>
+
+		  <label for='messageInput'>*Message: </label>
+          <input type='text' name='message' id='messageInput'>
+		  
+		  <input type='submit' id='newContactSubmit'>
+        </form>
+      </div>
     </main>
+</body>
+<script>
+  const contactForm = document.getElementById('newContactForm')
+
+  const firstName = document.getElementById('firstNameInput')
+  const lastName = document.getElementById('lastNameInput')
+  const contactEmail = document.getElementById('emailInput')
+  const contactSubject = document.getElementById('subjectInput')
+  const contactMessage = document.getElementById('messageInput')
+  const submitAnimeButton = document.getElementById('newAnimeSubmit')
+
+  const submitContact = async function(event) {
+    event.preventDefault();
+	
+	contactForm.innerHTML = 'Please wait'
+	
+	const fir = firstName.value
+    const las = lastName.value
+    const ema = contactEmail.value
+    const sub = contactSubject.value
+    const mes = contactMessage.value
+
+    const contact = {
+      firstName: fir,
+      lastName: las,
+      email: ema,
+      subject: sub,
+      message: mes
+    }
+
+    console.log(contact);
+
+    const response = await fetch('/newContact', {
+      method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json'
+        },
+      body: JSON.stringify(contact)
+    })
+    
+    if (response.ok) {
+      const result = await response.json()
+      if (result.ok) {
+        contactForm.innerHTML = `Message sent successfully!`
+        return
+      }
+    }
+	
+    contactForm.innerHTML = 'Server error'
+  }
+  
+  document.getElementById('newContactSubmit').addEventListener('click', submitContact);
+</script>
 <%- include('../shared/footer.ejs') %>

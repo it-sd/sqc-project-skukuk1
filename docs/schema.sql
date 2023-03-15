@@ -42,6 +42,16 @@ CREATE TABLE account (
   interest TEXT NOT NULL
 );
 
+DROP TABLE IF EXISTS contact;
+CREATE TABLE contact (
+  contact_id SERIAL PRIMARY KEY,
+  first_name TEXT NOT NULL,
+  last_name TEXT NOT NULL,
+  email TEXT NOT NULL,
+  subject TEXT NOT NULL,
+  message TEXT NOT NULL
+);
+
 INSERT INTO anime_list (anime_name, studio, genre, personal_rating, synopsis)
   VALUES
  ('Fullmetal Alchemist: Brotherhood', 'Bones', 'Action', '8/10', 'After a horrific alchemy experiment goes wrong in the Elric household,

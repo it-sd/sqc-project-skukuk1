@@ -78,11 +78,25 @@ const getMangasQuery = async function () {
   return { status, msg, result }
 }
 
+const getProfilesQuery = async function () {
+  const result = await query('SELECT * FROM account;', [])
+
+  let status = 200
+  let msg = 'healthy'
+
+  if (result === undefined || result.length === 0) {
+    status = 500
+    msg = 'unhealthy'
+  }
+  return { status, msg, result }
+}
+
 export {
   query,
   healthyQuery,
   getAnimesQuery,
-  getMangasQuery
+  getMangasQuery,
+  getProfilesQuery
 }
 
 express()
@@ -93,6 +107,33 @@ express()
   .set('view engine', 'ejs')
   .get('/', function (req, res) {
     res.render('pages/index')
+  })
+  .post('/newContact', async function (req, res) {
+    res.set({ 'Content-Type': 'application/json' })
+    try {
+      const client = await pool.connect()
+
+      const firstName = req.body.firstName
+      const lastName = req.body.lastName
+      const email = req.body.email
+      const subject = req.body.subject
+      const message = req.body.message
+
+      if (message === null || message === '') {
+        res.status(400).send('Server Error')
+        res.end()
+      } else {
+        const insertContactSql = "INSERT INTO contact (first_name, last_name, email, subject, message) VALUES('" + firstName + "', '" + lastName + "', '" + email + "', '" + subject + "', '" + message + "');"
+
+        await client.query(insertContactSql)
+
+        res.json({ ok: true })
+        client.release()
+      }
+    } catch (error) {
+      console.error('Invalid Entry')
+      res.status(400).json({ ok: false })
+    }
   })
   .get('/about', function (req, res) {
     res.render('pages/about')
@@ -135,6 +176,10 @@ express()
       console.error('Invalid Entry')
       res.status(400).json({ ok: false })
     }
+  })
+  .get('/profile', async function (req, res) {
+    const resultsProfile = await getProfilesQuery()
+    res.render('pages/profile', { profiles: resultsProfile.result })
   })
   .get('/addAnime', function (req, res) {
     res.render('pages/addAnime')
