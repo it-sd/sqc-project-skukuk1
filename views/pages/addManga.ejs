@@ -3,59 +3,79 @@
       <h2>The Butterfly Interest List - Add Manga Page</h2>
 	  <div>
 	    <h3>New Manga</h3>
-	    <form id="newMangaForm">
-		  <label for="mangaNameInput">Manga name: </label>
-          <input type="text" name="manga_name">
+		<p>Note: items with "*" are required.</p>
+	    <form id='newMangaForm'>
+		  <label for='mangaNameInput'>Manga name: </label>
+          <input type='text' name='manga_name' id='mangaNameInput'>
 
-		  <label for="authorInput">Author: </label>
-          <input type="text" name="author">
+		  <label for='authorInput'>Author: </label>
+          <input type='text' name='author' id='authorInput'>
 
-		  <label for="genreInput">Genre: </label>
-          <input type="text" name="genre">
+		  <label for='genreInput'>Genre: </label>
+          <input type='text' name='genre' id='genreInput'>
 		  
-		  <label for="personalRatingInput">Personal rating: </label>
-          <input type="text" name="personal_rating">
+		  <label for='personalRatingInput'>Personal rating: </label>
+          <input type='text' name='personal_rating' id='personalRatingInput'>
 
-		  <label for="synopsisInput">Synopsis: </label>
-          <input type="text" name="synopsis">
+		  <label for='synopsisInput'>Synopsis: </label>
+          <input type='text' name='synopsis' id='synopsisInput'>
 		  
-		  <input type="submit" id="newMangaSubmit">
+		  <input type='submit' id='newMangaSubmit'>
         </form>
       </div>
     </main>
 </body>
 <script>
-  const submitManga = function(event) {
+  const mangaForm = document.getElementById('newMangaForm')
+
+  const mangaName = document.getElementById('mangaNameInput')
+  const mangaAuthor = document.getElementById('authorInput')
+  const mangaGenre = document.getElementById('genreInput')
+  const mangaPersonalRating = document.getElementById('personalRatingInput')
+  const mangaSynopsis = document.getElementById('synopsisInput')
+  const submitMangaButton = document.getElementById('newMangaSubmit')
+
+  const submitManga = async function(event) {
     event.preventDefault();
-    const mangaName = document.getElementsByName("mangaNameInput");
-	const author = document.getElementsByName("authorInput");
-	const genre = document.getElementsByName("genreInput");
-	const personalRating = document.getElementsByName("personalRatingInput");
-	const synopsis = document.getElementsByName("synopsisInput");
+	
+	mangaForm.innerHTML = 'Please wait'
+	
+	const man = mangaName.value
+    const aut = mangaAuthor.value
+    const gen = mangaGenre.value
+    const per = mangaPersonalRating.value
+    const syn = mangaSynopsis.value
 
     const manga = {
-      mangaName: mangaName,
-	  author: author,
-	  genre: genre,
-	  personalRating: personalRating,
-	  synopsis: synopsis
+      mangaName: man,
+      mangaAuthor: aut,
+      genre: gen,
+      rating: per,
+      synopsis: syn
     }
 
     console.log(manga);
 
-    const res = fetch("/newManga", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
+    const response = await fetch('/newManga', {
+      method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json'
+        },
       body: JSON.stringify(manga)
     })
-    if (res.ok) {
-      document.getElementById("newMangaForm").innerHTML = "Manga added successfully.";
-    } else {
-      document.getElementById("newMangaForm").innerHTML = "Manga not added. Please try again.";
+    
+    if (response.ok) {
+      const result = await response.json()
+      if (result.ok) {
+        mangaForm.innerHTML = `Manga added successfully!`
+        return
+      }
     }
+	
+    mangaForm.innerHTML = 'Server error'
   }
-  document.getElementById("newMangaSubmit").addEventListener("click", submitManga);
+  
+  document.getElementById('newMangaSubmit').addEventListener('click', submitManga);
 </script>
 <%- include('../shared/footer.ejs') %>

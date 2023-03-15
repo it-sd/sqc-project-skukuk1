@@ -2,60 +2,80 @@
     <main>
       <h2>The Butterfly Interest List - Add Anime Page</h2>
 	  <div>
-	    <h3>New Anime</h3>
-	    <form id="newAnimeForm">
-		  <label for="animeNameInput">Anime name: </label>
-          <input type="text" name="anime_name" id="animeName">
+		<h3>New Anime</h3>
+	    <p>Note: items with "*" are required.</p>
+		<form id='newAnimeForm'>
+		  <label for='animeNameInput'>*Anime name: </label>
+          <input type='text' name='anime_name' id='animeNameInput'>
 
-		  <label for="studioInput">Studio: </label>
-          <input type="text" name="studio" id="studio">
+		  <label for='studioInput'>Studio: </label>
+          <input type='text' name='studio' id='studioInput'>
 
-		  <label for="genreInput">Genre: </label>
-          <input type="text" name="genre" id="genre">
+		  <label for='genreInput'>Genre: </label>
+          <input type='text' name='genre' id='genreInput'>
 		  
-		  <label for="personalRatingInput">Personal rating: </label>
-          <input type="text" name="personal_rating" id="personalRating">
+		  <label for='personalRatingInput'>Personal rating: </label>
+          <input type='text' name='personal_rating' id='personalRatingInput'>
 
-		  <label for="synopsisInput">Synopsis: </label>
-          <input type="text" name="synopsis" id="synopsis">
+		  <label for='synopsisInput'>Synopsis: </label>
+          <input type='text' name='synopsis' id='synopsisInput'>
 		  
-		  <input type="submit" id="newAnimeSubmit">
+		  <input type='submit' id='newAnimeSubmit'>
         </form>
       </div>
     </main>
 </body>
 <script>
-  const submitAnime = function(event) {
+  const animeForm = document.getElementById('newAnimeForm')
+
+  const animeName = document.getElementById('animeNameInput')
+  const animeStudio = document.getElementById('studioInput')
+  const animeGenre = document.getElementById('genreInput')
+  const animePersonalRating = document.getElementById('personalRatingInput')
+  const animeSynopsis = document.getElementById('synopsisInput')
+  const submitAnimeButton = document.getElementById('newAnimeSubmit')
+
+  const submitAnime = async function(event) {
     event.preventDefault();
-    const animeName = document.getElementsByName("animeNameInput");
-	const studio = document.getElementsByName("studioInput");
-	const genre = document.getElementsByName("genreInput");
-	const personalRating = document.getElementsByName("personalRatingInput");
-	const synopsis = document.getElementsByName("synopsisInput");
+	
+	animeForm.innerHTML = 'Please wait'
+	
+	const ani = animeName.value
+    const stu = animeStudio.value
+    const gen = animeGenre.value
+    const per = animePersonalRating.value
+    const syn = animeSynopsis.value
 
     const anime = {
-      animeName: animeName,
-	  studio: studio,
-	  genre: genre,
-	  personalRating: personalRating,
-	  synopsis: synopsis
+      animeName: ani,
+      animeStudio: stu,
+      genre: gen,
+      rating: per,
+      synopsis: syn
     }
 
     console.log(anime);
 
-    const res = fetch("/newAnime", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
+    const response = await fetch('/newAnime', {
+      method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json'
+        },
       body: JSON.stringify(anime)
     })
-    if (res.ok) {
-      document.getElementById("newAnimeForm").innerHTML = "Anime added successfully.";
-    } else {
-      document.getElementById("newAnimeForm").innerHTML = "Anime not added. Please try again.";
+    
+    if (response.ok) {
+      const result = await response.json()
+      if (result.ok) {
+        animeForm.innerHTML = `Anime added successfully!`
+        return
+      }
     }
+	
+    animeForm.innerHTML = 'Server error'
   }
-  document.getElementById("newAnimeSubmit").addEventListener("click", submitAnime);
+  
+  document.getElementById('newAnimeSubmit').addEventListener('click', submitAnime);
 </script>
 <%- include('../shared/footer.ejs') %>

@@ -106,16 +106,9 @@ express()
     const resultsManga = await getMangasQuery()
     res.render('pages/lists', { animes: resultsAnime.result, mangas: resultsManga.result })
   })
-
-  // This is where the create account functionaily starts
-  // start by just loading new page that I created called account
   .get('/account', (req, res) => {
     res.render('pages/account')
   })
-
-  // This is the post method for the account page, it is called newAccount
-  // creates a post request and talks to account.ejs
-  // gets data entered in input form from ejs and sends to database table called account
   .post('/newAccount', async function (req, res) {
     res.set({ 'Content-Type': 'application/json' })
     try {
@@ -143,8 +136,6 @@ express()
       res.status(400).json({ ok: false })
     }
   })
-  // End of create account functionality and code
-
   .get('/addAnime', function (req, res) {
     res.render('pages/addAnime')
   })
@@ -153,16 +144,31 @@ express()
     res.status(200).json({ animes: resultsAnime.result })
   })
   .post('/newAnime', async function (req, res) {
-    const { animeName, studio, genre, personalRating, synopsis } = req.body
-    console.log(animeName, studio, genre, personalRating, synopsis)
-    if (animeName === null || animeName === '') {
-      res.status(400).send('Bad Request')
-      res.end()
-    } else {
-      const insertAnimeSql = 'INSERT INTO anime_list (anime_name, studio, genre, personal_rating, synopsis) VALUES ($1, $2, $3, $4, $5);'
-      const animeParams = [animeName, studio, genre, personalRating, synopsis]
-      const animeResult = await query(insertAnimeSql, animeParams)
-      res.status(200).json({ animeResult })
+    res.set({ 'Content-Type': 'application/json' })
+    try {
+      const client = await pool.connect()
+
+      const animeName = req.body.animeName
+      const animeStudio = req.body.animeStudio
+      const genre = req.body.genre
+      const rating = req.body.rating
+      const synopsis = req.body.synopsis
+      console.log(animeName, animeStudio, genre, rating, synopsis)
+
+      if (animeName === null || animeName === '') {
+        res.status(400).send('Server Error')
+        res.end()
+      } else {
+        const insertAnimeSql = "INSERT INTO anime_list (anime_name, studio, genre, personal_rating, synopsis) VALUES('" + animeName + "', '" + animeStudio + "', '" + genre + "', '" + rating + "', '" + synopsis + "');"
+
+        await client.query(insertAnimeSql)
+
+        res.json({ ok: true })
+        client.release()
+      }
+    } catch (error) {
+      console.error('Invalid Entry')
+      res.status(400).json({ ok: false })
     }
   })
   .get('/addManga', function (req, res) {
@@ -173,16 +179,31 @@ express()
     res.status(200).json({ mangas: resultsManga.result })
   })
   .post('/newManga', async function (req, res) {
-    const { mangaName, author, genre, personalRating, synopsis } = req.body
-    console.log(mangaName, author, genre, personalRating, synopsis)
-    if (mangaName === null || mangaName === '') {
-      res.status(400).send('Bad Request')
-      res.end()
-    } else {
-      const insertMangaSql = 'INSERT INTO manga_list (manga_name, author, genre, personal_rating, synopsis) VALUES ($1, $2, $3, $4, $5);'
-      const mangaParams = [mangaName, author, genre, personalRating, synopsis]
-      const animeResult = await query(insertMangaSql, mangaParams)
-      res.status(200).json({ animeResult })
+    res.set({ 'Content-Type': 'application/json' })
+    try {
+      const client = await pool.connect()
+
+      const mangaName = req.body.mangaName
+      const mangaAuthor = req.body.mangaAuthor
+      const genre = req.body.genre
+      const rating = req.body.rating
+      const synopsis = req.body.synopsis
+      console.log(mangaName, mangaAuthor, genre, rating, synopsis)
+
+      if (mangaName === null || mangaName === '') {
+        res.status(400).send('Server Error')
+        res.end()
+      } else {
+        const insertMangaSql = "INSERT INTO manga_list (manga_name, author, genre, personal_rating, synopsis) VALUES('" + mangaName + "', '" + mangaAuthor + "', '" + genre + "', '" + rating + "', '" + synopsis + "');"
+
+        await client.query(insertMangaSql)
+
+        res.json({ ok: true })
+        client.release()
+      }
+    } catch (error) {
+      console.error('Invalid Entry')
+      res.status(400).json({ ok: false })
     }
   })
   .listen(PORT, () => console.log(`Listening on ${PORT}`))
