@@ -12,10 +12,25 @@ Here at The Butterfly Interest List, you will be able to create a list from your
 
 We can't wait for you to use our site. Enjoy your visit!
 
+## Render Link
+[The Butterfly Interest List](https://the-butterfly-interest-list.onrender.com)
+
 ## Database Entity Relationship Diagram
 ![Entity Relationship Diagram](/docs/EntityRelationshipDiagram.png)
 
-## Render Link
-[The Butterfly Interest List](https://the-butterfly-interest-list.onrender.com)
+## Datbase Connection
+I've decided to create a new database with the name of "the_butterfly_interest_list". If you decide to keep this database, you will need to make a `.env` file. All you need to have in the file is `DATABASE_URL=postgres://postgres:postgres@localhost/the_butterfly_interest_list`. Note: I've only tested this as a Windows user.
+
+If you want to use the default database, then you'll want to comment out these lines in the `schema.sql` file.
+
+    DROP DATABASE the_butterfly_interest_list;
+    CREATE DATABASE the_butterfly_interest_list;
+
+    \c the_butterfly_interest_list
+
+## Contributors
+lmarquardt7 - Account Creation
+
+swang6 - Update README.md
 
 4. Hello from swang6!
