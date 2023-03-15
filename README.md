@@ -29,8 +29,6 @@ If you want to use the default database, then you'll want to comment out these l
     \c the_butterfly_interest_list
 
 ## Contributors
-lmarquardt7 - Account Creation
-
-swang6 - Update README.md
+I'd like to thank lmarquardt7 (for account creation) and swang6 (for updating README.md) for contributing to my project. You guys are awesome!
 
 4. Hello from swang6!
