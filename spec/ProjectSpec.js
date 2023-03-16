@@ -1,4 +1,4 @@
-import { healthyQuery, getAnimesQuery, getMangasQuery } from '../server.js'
+import { healthyQuery, getAnimesQuery, getMangasQuery, getProfilesQuery } from '../server.js'
 
 const baseUrl = 'http://localhost:5163'
 describe('healthyQuery', function () {

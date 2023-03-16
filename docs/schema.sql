@@ -1,9 +1,11 @@
 \encoding UTF8
 
+/*
 DROP DATABASE the_butterfly_interest_list;
 CREATE DATABASE the_butterfly_interest_list;
 
 \c the_butterfly_interest_list
+*/
 
 DROP TABLE IF EXISTS list_item;
 CREATE TABLE list_item (
