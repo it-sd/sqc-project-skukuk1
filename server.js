@@ -251,4 +251,21 @@ express()
       res.status(400).json({ ok: false })
     }
   })
+  .get('/search', (req, res) => {
+    res.render('pages/search')
+  })
+  .post('/searchTitle', async function (req, res) {
+    const title = req.body.title
+    const apiKey = process.env.apiKey
+    const url = `https://api.watchmode.com/v1/list-titles/${title}/?apiKey={apiKey}&source_ids=203,57`
+
+    const response = await fetch(url, {
+      method: 'GET',
+      headers: {}
+    })
+
+    const result = await response.json()
+	
+	res.json({ ID: result.id, Title: result.title, Year: result.year, Type: result.type })
+  })
   .listen(PORT, () => console.log(`Listening on ${PORT}`))

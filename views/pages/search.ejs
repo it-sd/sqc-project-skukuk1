@@ -1,0 +1,55 @@
+<%- include('../shared/header.ejs') %>
+    <main>
+      <h2>The Butterfly Interest List - Search Page</h2>
+	  <div>
+		<h3>Search by Title</h3>
+		<div id='searchForm'>
+          <input type='text' name='title' id='titleInput'>
+		  
+		  <button id="searchSubmit">Search</button>
+        </div>
+      </div>
+	  <div id="displayResults">
+        <h3>Results below</h3>
+      </div>
+    </main>
+</body>
+<script>
+  const resultsDisplay = document.getElementById('displayResults')
+  const title = document.getElementById('titleInput')
+  const submitSearchButton = document.getElementById('searchSubmit')
+
+  const submitSearch = async function(event) {
+    event.preventDefault();
+	
+	searchForm.innerHTML = 'Please wait'
+
+    const search = {
+      title: title.value
+    }
+
+    console.log(search);
+
+    const response = await fetch('/searchTitle', {
+      method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json'
+        },
+      body: JSON.stringify(search)
+    })
+    
+    if (response.ok) {
+      const result = await response.json()
+      if (result.id&& result.title && result.year && result.type) {
+		resultsDisplay.innerHTML = `<div><table><tr><th>ID</th><th>Title</th><th>Year</th><th>Type</th></tr><tr><td>${result.id}</td><td>${result.title}</td><td>${result.year}</td><td>${result.type}</td></tr></table></div>`
+        return
+      }
+    }
+	
+    resultsDisplay.innerHTML = 'Server error'
+  }
+  
+  submitSearchButton.addEventListener('click', submit.bind(null))
+</script>
+<%- include('../shared/footer.ejs') %>
