@@ -103,9 +103,9 @@ describe('GET /health', function () {
 describe('GET /lists', function () {
   it('should return a status between 200 & 399', async function () {
     const resultsAnime = await fetch(baseUrl)
-	expect(resultsAnime.status).toBeGreaterThanOrEqual(200)
+    expect(resultsAnime.status).toBeGreaterThanOrEqual(200)
     expect(resultsAnime.status).toBeLessThanOrEqual(399)
-	const resultsManga = await fetch(baseUrl)
+    const resultsManga = await fetch(baseUrl)
     expect(resultsManga.status).toBeGreaterThanOrEqual(200)
     expect(resultsManga.status).toBeLessThanOrEqual(399)
   })
@@ -192,11 +192,11 @@ describe("POST '/newAnime'", function () {
   const url = new URL('/newAccount', baseUrl)
   it('should accept valid anime information and send to database', async function () {
     const anime = {
-      animeName: '',
-      animeStudio: '',
-      genre: '',
-      rating: '',
-      synopsis: ''
+      animeName: 'Shingeki no Kyojin: The Final Season - Kanketsu-hen',
+      animeStudio: 'MAPPA',
+      genre: 'Action',
+      rating: '4/10',
+      synopsis: 'The conclusion to Shingeki no Kyojin.'
     }
     const response = await fetch(url, {
       method: 'POST',
@@ -274,11 +274,11 @@ describe("POST '/newManga'", function () {
   })
   it('should not send information to database if mangaName is null', async function () {
     const manga = {
-      mangaName: '',
-      mangaAuthor: '',
-      genre: '',
-      rating: '',
-      synopsis: ''
+      mangaName: 'Slam Dunk',
+      mangaAuthor: 'Takehiko Inoue',
+      genre: 'Sport',
+      rating: '4/10',
+      synopsis: 'The conclusion to Slam Dunk.'
     }
     const response = await fetch(url, {
       method: 'POST',
